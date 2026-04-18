@@ -10,7 +10,7 @@
     body {
       background: #111;
       color: white;
-      font-family: Arial;
+      font-family: Arial, sans-serif;
       text-align: center;
       margin-top: 120px;
     }
@@ -45,14 +45,17 @@
 
 <script>
 function onLogin(response) {
+    // читаем токен Google
     const payload = JSON.parse(atob(response.credential.split('.')[1]));
 
-    // стабильное имя (без декодирования!)
+    // максимально стабильное имя (любой язык)
     const name = payload.name || payload.given_name || payload.email;
 
+    // показываем экран
     document.getElementById("loginBox").style.display = "none";
     document.getElementById("welcome").style.display = "block";
 
+    // выводим имя
     document.getElementById("text").innerText = "Привет, " + name + " 👋";
 }
 </script>
