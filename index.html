@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Login Page</title>
+  <title>Login</title>
 
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 
@@ -19,10 +19,6 @@
       display: none;
       font-size: 30px;
     }
-
-    #loginBox {
-      display: block;
-    }
   </style>
 </head>
 
@@ -32,7 +28,7 @@
   <h1>Войдите в аккаунт</h1>
 
   <div id="g_id_onload"
-       data-client_id="data-client_id="1092101383564-esh60orv9blj12fgbcutk754o25uo670.apps.googleusercontent.com"
+       data-client_id="data-client_id="1092101383564-esh60orv9blj12fgbcutk754o25uo670.apps.googleusercontent.com""
        data-callback="handleLogin">
   </div>
 
@@ -40,15 +36,20 @@
 </div>
 
 <div id="welcome">
-  <h1>Спасибо за вход</h1>
-  <h2>Привет 👋</h2>
+  <h1 id="greeting">Привет 👋</h1>
 </div>
 
 <script>
 function handleLogin(response) {
-    // пользователь вошёл
+    // декодируем данные пользователя
+    const payload = JSON.parse(atob(response.credential.split('.')[1]));
+
+    const name = payload.name; // имя аккаунта Google
+
     document.getElementById("loginBox").style.display = "none";
     document.getElementById("welcome").style.display = "block";
+
+    document.getElementById("greeting").innerText = "Привет, " + name + " 👋";
 }
 </script>
 
