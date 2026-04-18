@@ -12,12 +12,16 @@
       color: white;
       font-family: Arial;
       text-align: center;
-      margin-top: 100px;
+      margin-top: 120px;
     }
 
     #welcome {
       display: none;
-      font-size: 30px;
+      font-size: 32px;
+    }
+
+    #loginBox {
+      display: block;
     }
   </style>
 </head>
@@ -29,27 +33,25 @@
 
   <div id="g_id_onload"
        data-client_id="1092101383564-esh60orv9blj12fgbcutk754o25uo670.apps.googleusercontent.com"
-       data-callback="handleLogin">
+       data-callback="onLogin">
   </div>
 
   <div class="g_id_signin"></div>
 </div>
 
 <div id="welcome">
-  <h1 id="greeting">Привет 👋</h1>
+  <h1 id="text">Привет 👋</h1>
 </div>
 
 <script>
-function handleLogin(response) {
-    // декодируем данные пользователя
+function onLogin(response) {
     const payload = JSON.parse(atob(response.credential.split('.')[1]));
-
-    const name = payload.name; // имя аккаунта Google
+    const name = payload.name;
 
     document.getElementById("loginBox").style.display = "none";
     document.getElementById("welcome").style.display = "block";
 
-    document.getElementById("greeting").innerText = "Привет, " + name + " 👋";
+    document.getElementById("text").innerText = "Привет, " + name + " 👋";
 }
 </script>
 
