@@ -47,12 +47,8 @@
 function onLogin(response) {
     const payload = JSON.parse(atob(response.credential.split('.')[1]));
 
-    let name = payload.name || payload.given_name || payload.email;
-
-    // защита от "кракозябр"
-    try {
-        name = decodeURIComponent(escape(name));
-    } catch (e) {}
+    // стабильное имя (без декодирования!)
+    const name = payload.name || payload.given_name || payload.email;
 
     document.getElementById("loginBox").style.display = "none";
     document.getElementById("welcome").style.display = "block";
